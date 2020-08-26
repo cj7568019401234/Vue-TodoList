@@ -4,7 +4,7 @@
     <i class="nav__add" @click="showModal"></i>
 </div>
 </template>
-<script type="text/javascript">
+<script>
     export default {
         methods: {
             showModal() {
