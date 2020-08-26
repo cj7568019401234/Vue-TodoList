@@ -1,0 +1,18 @@
+<template>
+<div class="nav">
+    <label class='nav__logo '>❤ TodoList</label>
+    <i class="nav__add" @click="showModal"></i>
+</div>
+</template>
+<script type="text/javascript">
+    export default {
+        methods: {
+            showModal() {
+                console.log(123);
+            }
+        }
+    }
+</script>
+<style>
+
+</style>
