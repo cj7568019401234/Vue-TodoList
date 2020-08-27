@@ -2,42 +2,38 @@
   <div class="wrap">
     <div class="todolist">
       <div class="collapse-panel" bindtap="handleCollapseEvent" data-type="todo">
-        <!-- <i class="{'spread', 'collapse-rotate' : todo.collapse}"></i> -->
-        <i class="spread collapse-rotate"></i>
-        待完成
-        <i class="todo-icon"></i>
-        {{todoNum}}
+        <i class="spread" :class="{'collapse-rotate' : todo.collapse}"></i>待完成
+        <i class="todo-icon"></i>{{todoNum}}
       </div>
-      <!-- <block v-if="todo.isShowed" wx:for={{todoList}} wx:key="id" data={{item}} class="list">
+      <div v-if="todo.isShowed" v-for="item in todoList" :key="item.id" class="list">
         <div
           v-if="!item.isFinished"
           class="item-container list"
-          bindtap="bindEdit"
-          data-id={{item.id}}
+          @click="EditTodo"
         >
           <div class="center item-left">
             <checkbox
               class="item__check"
               checked="item.isFinished ? 'checked' : ''"
               catchtap="bindToggle"
-              data-id="item.id"
+              v-model="item.id"
             />
             <div class="item__main">
-              <text class="item__main__text">{{item.value}}</text>
-              <text v-if="item.endDate" class="item__main__date">{{item.endDate}}</text>
-              <text v-if="item.endTime" class="item__main__time">{{item.endTime}}</text>
+              <label class="item__main__text">{{item.value}}</label>
+              <label v-if="item.endDate" class="item__main__date">{{item.endDate}}</label>
+              <label v-if="item.endTime" class="item__main__time">{{item.endTime}}</label>
             </div>
           </div>
-          <i class="del-icon" catchtap="bindDelete" data-id={{item.id}}></i>
+          <i class="del-icon" catchtap="bindDelete" :id="item.id"></i>
         </div>
-      </block>
-      <div v-if="!todoNum && todo.isShowed" class="empty center list--todo">
+      </div>
+<!-- <div v-if="!todoNum && todo.isShowed" class="empty center list--todo">
         <i class="box-icon"></i>
         <text>你还没有添加任务呢~</text>
       </div> -->
-    </div>
-    <div class="donelist">
-      <!-- <div
+</div>
+<div class="donelist">
+    <!-- <div
         class="[collapse-panel,collapse-panel--done,done.isShowed ? '' : 'list--done']"
         bindtap="handleCollapseEvent"
         data-type="done"
@@ -73,15 +69,32 @@
         <i class="box-icon"></i>
         <text>空空如也~</text>
       </div>-->
-    </div>
-  </div>
+</div>
+</div>
 </template>
 <script>
-export default {
-  methods: {
-    showModal() {
-      console.log('tosoList')
+    export default {
+        data: function() {
+            return {
+                isActive: true,
+                todo: {
+                    collapse: false,
+                    isShowed: true
+                },
+                todoNum: 12,
+                todoList: [{
+                    id: 1,
+                    value: 'hhhhha',
+                    endDate: '2020年12月10日',
+                    endTime: '23:27',
+                    isFinished: false
+                }]
+            }
+        },
+        methods: {
+            showModal() {
+                console.log('tosoList')
+            }
+        }
     }
-  }
-}
 </script>
