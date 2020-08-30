@@ -1,7 +1,7 @@
 <template>
 <div class="nav">
     <label class='nav__logo '>❤ TodoList</label>
-    <i class="nav__add" @click="showModal"></i>
+    <div class="nav__add" @click="showModal"></div>
 </div>
 </template>
 <script>
