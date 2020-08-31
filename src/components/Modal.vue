@@ -53,18 +53,18 @@
     </div>
 </template>
 <script>
-    import moment from 'moment';
+    import moment from 'moment'
     export default{
-        data: function(){
-            return{
-                showModal:true
+        data: function() {
+            return {
+                showModal: true
             }
         },
         methods: {
             moment,
             onChange(time, timeString) {
-                console.log(time, timeString);
-            },
+                console.log(time, timeString)
+            }
         } 
         // methods: {
         //     showModal() {

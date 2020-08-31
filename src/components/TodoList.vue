@@ -18,7 +18,7 @@
             <div class="del-icon" catchtap="bindDelete" :id="item.id"></div>
           </div>
       </div>
-      <div v-if="!getTodo.length && todo.isShowed" class="empty center list--todo">
+      <div v-if="!getTodo.length && showTodo" class="empty center list--todo">
         <div class="box-icon"></div>
         <label>你还没有添加任务呢~</label>
       </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="del-icon" @click="deleteTodo(item.id)"></div>
           </div>
-        <div v-if="!getDone.length" class="empty center list--done">
+        <div v-if="!getDone.length && showDone" class="empty center list--done">
           <div class="box-icon"></div>
           <label>空空如也~</label>
         </div>
@@ -52,28 +52,28 @@
     export default {
         data: function() {
             return {
-                showTodo:true,
-                showDone:true
+                showTodo: true,
+                showDone: true
             }
         },
         computed: {
-          //获取未完成的任务
-          getTodo(){
+          // 获取未完成的任务
+          getTodo() {
             console.log('gettodo')
-            return this.$store.getters.getTodo;
+            return this.$store.getters.getTodo
           },
-          //获取已完成的任务
-          getDone(){
-            console.log('getdone',this.$store.getters.getDone)
-            return this.$store.getters.getDone;
+          // 获取已完成的任务
+          getDone() {
+            console.log('getdone', this.$store.getters.getDone)
+            return this.$store.getters.getDone
           }
         },
         methods: {
             showModal() {
                 console.log('tosoList')
             },
-            toggleTodo(id){
-              this.$store.commit('TOGGLETODO',id)
+            toggleTodo(id) {
+              this.$store.dispatch('toggleTodo', id)
             }
         }
     }
