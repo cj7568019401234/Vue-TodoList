@@ -23,9 +23,11 @@ let state = {
       id: 3,
       value: '第三个任务hhhhha2233',
       endDate: '',
-      endTime: '23:27',
+      endTime: '23:07',
       isFinished: true
-  }]
+  }],
+  showTodo: true,
+  showDone: true
 }
 
 export default {

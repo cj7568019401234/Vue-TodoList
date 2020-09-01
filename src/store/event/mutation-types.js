@@ -13,3 +13,6 @@ export const DELETETODO = 'DELETETODO'
 
 // 修改事件
 export const MODIFYTODO = 'MODIFYTODO'
+
+// 收起展开视图
+export const COLLAPSE = 'COLLAPSE'

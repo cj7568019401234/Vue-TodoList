@@ -2,7 +2,7 @@
     <div id="app">
         <nHeader></nHeader>
         <nTodoList></nTodoList>
-        <!-- <nModal></nModal> -->
+        <nModal></nModal>
     </div>
 </template>
 <script>
@@ -74,7 +74,6 @@
     .center {
         display: flex;
         align-items: center;
-        /* justify-content: center; */
     }
     
     .spread {
@@ -274,8 +273,9 @@
     }
     
     .modal__body {
-        display: flex;
-        justify-content: flex-start;
+        display: flex; 
+        margin:0 14px 10px 14px;
+        justify-content: space-between;
         border-radius: 0 0 2px 2px;
     }
     
@@ -285,6 +285,10 @@
         align-items: center;
     }
     
+    .ant-picker {
+        margin: 20px 20px 0 0;
+    }
+
     .todo-input {
         overflow: scroll;
         width: 90%;

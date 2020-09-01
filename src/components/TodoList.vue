@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="todolist">
-      <div class="collapse-panel" bindtap="handleCollapseEvent">
+      <div class="collapse-panel" @click="handleCollapseEvent('todo')">
         <div class="center"><div class="spread" :class="{'collapse-rotate' : !showTodo}"></div>待完成</div>
         <div class="center"><div class="todo-icon"></div>{{getTodo.length}}</div>
       </div>
@@ -15,7 +15,7 @@
                 <label v-if="item.endTime" class="item__main__time">{{item.endTime}}</label>
               </div>
             </div>
-            <div class="del-icon" catchtap="bindDelete" :id="item.id"></div>
+            <div class="del-icon" @click="deleteTodo" :id="item.id"></div>
           </div>
       </div>
       <div v-if="!getTodo.length && showTodo" class="empty center list--todo">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="donelist">
-      <div class="collapse-panel collapse-panel--done" :class="{'list--done' : !showDone}" @click="handleCollapseEvent"  data-type="done">
+      <div class="collapse-panel collapse-panel--done" :class="{'list--done' : !showDone}" @click="handleCollapseEvent('done')"  data-type="done">
          <div class="center"><div class="spread" :class="{ 'collapse-rotate' : !showDone}"></div>已完成</div>
          <div class="center"><div class="done-icon"></div>{{getDone.length}}</div>
       </div>
@@ -32,7 +32,7 @@
         <div v-for="item in getDone" :key="item.id"  class="item-container list">
             <div  class="center item-left"  >
               <input type="checkbox" :checked="true" @click="toggleTodo(item.id)"/>
-              <div class="item__main"  @click="EditTodo">
+              <div class="item__main"  @click="editTodo(item.id)">
                 <label class="item__main__text">{{item.value}}</label>
                 <label v-if="item.endDate" class="end-text item__main__date">{{item.endDate}}</label>
                 <label v-if="item.endTime" class="end-text item__main__time">{{item.endTime}}</label>
@@ -49,32 +49,42 @@
   </div>
 </template>
 <script>
-    export default {
-        data: function() {
-            return {
-                showTodo: true,
-                showDone: true
-            }
+  import { mapState } from 'vuex'
+  export default {
+      computed: mapState({
+        // 获取未完成的任务
+        getTodo() {
+          return this.$store.getters.getTodo
         },
-        computed: {
-          // 获取未完成的任务
-          getTodo() {
-            console.log('gettodo')
-            return this.$store.getters.getTodo
+
+        // 获取已完成的任务
+        getDone() {
+          return this.$store.getters.getDone
+        },
+
+        // 是否展示已完成任务列表
+        showDone: state => state.event.showDone,
+
+        // 是否展示未完成任务列表
+        showTodo: state => state.event.showTodo
+      }),
+      methods: {
+          showModal() {
+              
           },
-          // 获取已完成的任务
-          getDone() {
-            console.log('getdone', this.$store.getters.getDone)
-            return this.$store.getters.getDone
+          toggleTodo(id) {
+            this.$store.dispatch('toggleTodo', id)
+          },
+          editTodo(id) {
+
+          },
+          handleCollapseEvent(type) {
+            console.log(type)
+            this.$store.commit('COLLAPSE', type)
+          },
+          deleteTodo() {
+            
           }
-        },
-        methods: {
-            showModal() {
-                console.log('tosoList')
-            },
-            toggleTodo(id) {
-              this.$store.dispatch('toggleTodo', id)
-            }
-        }
-    }
+      }
+  }
 </script>

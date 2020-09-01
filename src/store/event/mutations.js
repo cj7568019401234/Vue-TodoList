@@ -20,6 +20,13 @@
              }
          })
          state.todoList = todoList
-         console.log(1111, id)
+     },
+     // 展开收缩列表
+     [types.COLLAPSE](state, type) {
+         if (type === 'todo') {
+             state.showTodo = !state.showTodo
+         } else if (type === 'done') {
+             state.showDone = !state.showDone
+         }
      }
  }
