@@ -274,9 +274,14 @@
     
     .modal__body {
         display: flex; 
-        margin:0 14px 10px 14px;
-        justify-content: space-between;
+        margin:10px;
+        margin-top: 0;
+        justify-content: flex-end;
         border-radius: 0 0 2px 2px;
+    }
+
+    .ant-time-picker {
+        margin-left:10px;
     }
     
     .modal__input {
@@ -290,32 +295,12 @@
     }
 
     .todo-input {
-        overflow: scroll;
-        width: 90%;
+        width: 100%;
         height: 90px;
-        padding: 10px;
+        padding: 5px;
         margin: 10px;
         border: 1px solid #d9d9d9;
         border-radius: 2px;
-    }
-    
-    .pick {
-        /* display: flex;
-        justify-content: space-between;
-        align-items: center; */
-        /* width: 120px; */
-        /* padding: 4px 10px;
-        margin-left: 12px;
-        margin-bottom: 12px; */
-        color: rgba(0, 0, 0, 0.65);
-        font-size: 14px;
-        /* border: 1px solid #d9d9d9; */
-        /* border-radius: 2px; */
-    }
-    
-    .pick input {
-        display: inline-block;
-        width: 70%;
     }
     
     .modal__footer {
