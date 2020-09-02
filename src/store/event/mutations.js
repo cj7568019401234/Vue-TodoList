@@ -2,17 +2,37 @@
  * Created by cj on 2020/08/29
  */
 
- import * as types from './mutation-types'
- 
- export default{
+import * as types from './mutation-types'
+
+export default {
     // 添加任务
     [types.ADDTODO](state, obj) {
-        state.todoNum++
-        obj.items.id = state.num
+        console.log(obj)
+        obj.items.id = state.todoList.length
+    },
+    // 编辑任务
+    [types.EDITTODO](state, obj) {
+        console.log(obj)
+        if (obj.id >= 0) {
+            console.log('edit')
+            state.todoList.some((item, index) => {
+                if (item.id === obj.id) {
+                    obj['isFinished'] = state.todoList[index].isFinished
+                    state.todoList[index] = obj
+                    return true
+                }
+            })
+        } else {
+            console.log('add')
+            obj['id'] = state.todoList.length
+            state.todoList.push(obj)
+        }
     },
     // 扭转任务状态
     [types.TOGGLETODO](state, id) {
-        let { todoList } = state
+        let {
+            todoList
+        } = state
         todoList.some((item, index) => {
             if (item.id === id) {
                 todoList[index].isFinished = !todoList[index].isFinished
@@ -30,7 +50,7 @@
         }
     },
     // 展示编辑框
-    [types.SHOWMODAL](state, id) {
-        state.showModal = true
+    [types.HANDLEMODAL](state) {
+        state.showModal = !state.showModal
     }
- }
+}

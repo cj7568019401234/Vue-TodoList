@@ -7,12 +7,13 @@
                     <textarea placeholder="请输入任务" class="todo-input"  v-model="text"></textarea>
                 </div>
                 <div class="modal__body">
-                    <a-date-picker class='center' placeholder="截止日期" :default-value="moment(endDate)"  />
-                    <a-time-picker class='center pick-time' placeholder="截止时间" :default-value="moment(endTime, 'HH:mm:ss')" />
+                    <a-date-picker class='center' placeholder="截止日期" v-model="endDate" :default-value="moment(endDate)"  />
+                    <a-time-picker class='center pick-time' placeholder="截止时间"  v-model="endTime" :default-value="moment(endTime, 'HH:mm:ss')" />
                 </div>
                 <div class="modal__footer">
                     <button class="btn" size="mini" @click="closeModal">取消</button >
-                    <button class="btn confirm-btn" >确认</button>
+                    <button class="btn confirm-btn" @click='editTodo'>确认</button>
+                    {{endTime}}
                 </div>
             </div>
         </div>
@@ -20,33 +21,37 @@
 </template>
 <script>
     import moment from 'moment'
-    import { mapState } from 'vuex' 
     export default {
         data: function() {
             return {
-            //     showModal: true, // 是否展示弹窗
-            //     id: -1,
-                text: '' // 任务描述
-            //     endDate: '', // 任务截止日期
-            //     endTime: null, // 任务截止时间
-            //     dateFormat: 'YYYY/MM/DD', // 日期格式
-            //     timeformat: 'HH:mm' // 时间格式
+                id: this.$store.state.event.id, // 任务id
+                text: this.$store.state.event.text, // 任务描述
+                endDate: this.$store.state.event.endDate, // 任务截止日期
+                endTime: this.$store.state.event.endTime // 任务截止时间
             }                                                                 
         },
-        computed: mapState({
-            showModal: state => state.event.showModal, // 是否展示弹窗
-            text: state => state.event.text,
-            endDate: state => state.event.endDate, // 任务截止日期
-            endTime: state => state.event.endTime // 任务截止时间
-        }),
+        computed: {
+            // 是否展示弹窗
+            showModal() {
+                return this.$store.state.event.showModal 
+            } 
+        },
         methods: {
             moment,
-            onChange(time, timeString) {
-                console.log(time, timeString)
-            },
+            // 关闭弹窗
             closeModal() {
-
+                this.$store.commit('HANDLEMODAL')
+            },
+            editTodo() {
+                console.log(323454)
+                let item = {}
+                item.text = this.text
+                item.id = this.id
+                item.endDate = this.endDate
+                item.endTime = this.endTime
+                this.$store.dispatch('editTodo', item)  
+                this.$store.commit('HANDLEMODAL')
             }
-        } 
+        }
     }
 </script>

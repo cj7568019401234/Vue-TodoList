@@ -10,7 +10,7 @@
             <div class="center item-left">
               <input type="checkbox"  @click="toggleTodo(item.id)"/>
               <div class="item__main" @click="editTodo(item.id)">
-                <label class="item__main__text">{{item.value}}</label>
+                <label class="item__main__text">{{item.text}}</label>
                 <label v-if="item.endDate" class="item__main__date">{{item.endDate}}</label>
                 <label v-if="item.endTime" class="item__main__time">{{item.endTime}}</label>
               </div>
@@ -33,7 +33,7 @@
             <div  class="center item-left"  >
               <input type="checkbox" :checked="true" @click="toggleTodo(item.id)"/>
               <div class="item__main"  @click="editTodo(item.id)">
-                <label class="item__main__text">{{item.value}}</label>
+                <label class="item__main__text">{{item.text}}</label>
                 <label v-if="item.endDate" class="end-text item__main__date">{{item.endDate}}</label>
                 <label v-if="item.endTime" class="end-text item__main__time">{{item.endTime}}</label>
               </div>

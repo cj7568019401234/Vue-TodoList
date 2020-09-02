@@ -3,5 +3,6 @@
  */
 
  export default {
-    toggleTodo: ({ commit }, id) => commit('TOGGLETODO', id)
+    toggleTodo: ({ commit }, id) => commit('TOGGLETODO', id),
+    editTodo: ({ commit }, param) => commit('EDITTODO', param)
  }

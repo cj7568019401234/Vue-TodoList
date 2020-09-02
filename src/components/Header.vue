@@ -9,11 +9,10 @@
         methods: {
             // 展示编辑框
             showModal() {
-                this.$store.commit('SHOWMODAL')
+                this.$store.commit('HANDLEMODAL')
             }
         }
     }
 </script>
 <style>
-
 </style>
