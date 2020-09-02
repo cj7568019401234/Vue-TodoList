@@ -16,3 +16,6 @@ export const MODIFYTODO = 'MODIFYTODO'
 
 // 收起展开视图
 export const COLLAPSE = 'COLLAPSE'
+
+// 展示编辑框
+export const SHOWMODAL = 'SHOWMODAL'

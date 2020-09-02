@@ -7,8 +7,9 @@
 <script>
     export default {
         methods: {
+            // 展示编辑框
             showModal() {
-                console.log(123)
+                this.$store.commit('SHOWMODAL')
             }
         }
     }

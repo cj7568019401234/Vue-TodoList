@@ -27,7 +27,12 @@ let state = {
       isFinished: true
   }],
   showTodo: true,
-  showDone: true
+  showDone: true,
+  showModal: false,
+  id: -1,
+  text: '333333333333333444',
+  endDate: null,
+  endTime: ''
 }
 
 export default {
