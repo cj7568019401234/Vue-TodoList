@@ -30,9 +30,9 @@ let state = {
     showDone: true,
     showModal: false,
     id: -1,
-    text: '333333333333333444',
-    endDate: '2020/09/09',
-    endTime: '09:30:00'
+    text: '',
+    endDate: '2020/09/02',
+    endTime: '2000-01-01 00:10:00'
 }
 
 export default {

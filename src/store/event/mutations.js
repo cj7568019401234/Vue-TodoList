@@ -19,12 +19,20 @@ export default {
                 if (item.id === obj.id) {
                     obj['isFinished'] = state.todoList[index].isFinished
                     state.todoList[index] = obj
+                    state.id = -1
+                    state.text = ''
+                    state.emdDate = ''
+                    state.emdTime = ''
                     return true
                 }
             })
         } else {
             console.log('add')
             obj['id'] = state.todoList.length
+            state.id = -1
+            state.text = ''
+            state.emdDate = ''
+            state.emdTime = ''
             state.todoList.push(obj)
         }
     },
