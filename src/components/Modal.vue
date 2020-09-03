@@ -7,8 +7,8 @@
                     <textarea placeholder="请输入任务" class="todo-input"  v-model="text"></textarea>
                 </div>
                 <div class="modal__body">
-                    <a-date-picker class='center' placeholder="截止日期" @change="onChangeDate"  :default-value="moment(endDate)"  format="YYYY/MM/DD" />
-                    <a-time-picker class='center pick-time' placeholder="截止时间"  @change="onChangeTime" :default-value="moment(endTime)" format="HH:mm:ss"/>
+                    <a-date-picker class='center' placeholder="截止日期" @change="onChangeDate"  :default-value="moment(endDate, 'YYYY/MM/DD')"  format="YYYY/MM/DD" />
+                    <a-time-picker class='center pick-time' placeholder="截止时间"  @change="onChangeTime" :default-value="moment(endTime,'HH:mm')" format="HH:mm"/>
                 </div>
                 <div class="modal__footer">
                     <button class="btn" size="mini" @click="closeModal">取消</button >
@@ -25,8 +25,8 @@
             return {
                 id: this.$store.state.event.id, // 任务id
                 text: this.$store.state.event.text, // 任务描述
-                endDate: this.$store.state.event.endDate, // 任务截止日期
-                endTime: this.$store.state.event.endTime // 任务截止时间
+                endDate: this.$store.state.event.endDate || new Date(), // 任务截止日期
+                endTime: this.$store.state.event.endTime || '23:59' // 任务截止时间
             }                                                                 
         },
         computed: {
@@ -41,7 +41,17 @@
             closeModal() {
                 this.$store.commit('HANDLEMODAL')
             },
+            // 修改todo任务，已有id为修改，id为-1为新增
             editTodo() {
+                console.log(this.endDate, typeof this.endDate)
+                console.log(this.endTime, typeof this.endTime)
+                if (typeof this.endDate === 'object') {
+                    let year = this.endDate.getFullYear()// getFullYear() 返回年
+                    let month = this.endDate.getMonth() + 1// getMonth() 返回月份 (0 ~ 11)
+                    let day = this.endDate.getDate()// getDate() 返回日 (1 ~ 31)
+                    this.endDate = `${year}/${month}/${day}` // 格式化日期
+                }
+
                 let item = {}
                 item.text = this.text
                 item.id = this.id
@@ -49,13 +59,18 @@
                 item.endTime = this.endTime
                 this.$store.dispatch('editTodo', item)  
                 this.$store.commit('HANDLEMODAL') // 关闭编辑弹窗
+
+                this.id = -1
+                this.text = ''
+                this.endDate = new Date()
+                this.endTime = '23:59'
             },
-            onChangeDate(date, dateString) {
-                console.log(date, dateString)
+            // 处理日期选择器的变化
+            onChangeDate(date, dateString) { 
                 this.endDate = dateString
             },
+            // 处理时间选择器的变化
             onChangeTime(time, timeString) {
-                console.log(time, timeString)
                 this.endTime = timeString
             }
         }
