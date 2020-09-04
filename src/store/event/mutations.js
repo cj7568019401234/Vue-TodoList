@@ -5,11 +5,16 @@
 import * as types from './mutation-types'
 
 export default {
-    // 添加任务
-    [types.ADDTODO](state, obj) {
-        obj.items.id = state.todoList.length
+    // 删除任务
+    [types.DELETETODO](state, id) {
+        state.todoList.some((item, index) => {
+           if (item.id === id) {
+               state.todoList.splice(index, 1)
+               return true
+           } 
+        })
     },
-    // 编辑任务
+    // 编辑任务，id不小于0就是编辑，小于0就是新增
     [types.EDITTODO](state, obj) {
         if (!obj.text) {
             return 
@@ -23,10 +28,9 @@ export default {
                 }
             })
         } else {
-            obj['id'] = state.todoList.length
+            obj['id'] = state.todoList.length + 1
+            obj['isFinished'] = false
             state.todoList.push(obj)
-
-            console.log('edittodo', state, state.endDate, state.endTime, typeof state.endDate, typeof state.endTime)
         }
     },
     // 扭转任务状态

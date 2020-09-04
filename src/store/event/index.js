@@ -31,8 +31,8 @@ let state = {
     showModal: false,
     id: -1,
     text: '',
-    endDate: new Date(),
-    endTime: '23:59'
+    endDate: '',
+    endTime: ''
 }
 
 export default {

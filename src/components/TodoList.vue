@@ -15,7 +15,7 @@
                 <label v-if="item.endTime" class="item__main__time">{{item.endTime}}</label>
               </div>
             </div>
-            <div class="del-icon" @click="deleteTodo" :id="item.id"></div>
+            <div class="del-icon" @click="deleteTodo(item.id)"></div>
           </div>
       </div>
       <div v-if="!getTodo.length && showTodo" class="empty center list--todo">
@@ -69,21 +69,22 @@
         showTodo: state => state.event.showTodo
       }),
       methods: {
-          showModal() {
-              
+          // 处理展开或者收缩任务列表
+          handleCollapseEvent(type) {
+            this.$store.commit('COLLAPSE', type)
           },
+          // 扭转任务状态
           toggleTodo(id) {
             this.$store.dispatch('toggleTodo', id)
           },
+          // 编辑任务
           editTodo(id) {
+             this.$store.commit('HANDLEMODAL')
 
           },
-          handleCollapseEvent(type) {
-            console.log(type)
-            this.$store.commit('COLLAPSE', type)
-          },
-          deleteTodo() {
-            
+          // 删除任务
+          deleteTodo(id) {
+            this.$store.dispatch('deleteTodo', id)
           }
       }
   }
