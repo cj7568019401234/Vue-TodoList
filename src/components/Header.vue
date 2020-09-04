@@ -7,10 +7,7 @@
 <script>
     export default {
         methods: {
-            // 展示编辑框
-            showModal() {
-                this.$store.commit('HANDLEMODAL')
-            }
+            showModal() { this.$store.commit('HANDLEMODAL') } // 展示编辑框
         }
     }
 </script>

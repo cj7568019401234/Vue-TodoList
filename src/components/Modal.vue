@@ -20,31 +20,30 @@
 </template>
 <script>
     import moment from 'moment'
+    import { mapState } from 'vuex'
+
     export default {
-        data: function() {
-            return {
-                id: this.$store.state.event.id, // 任务id
-                text: this.$store.state.event.text, // 任务描述
-                endDate: this.$store.state.event.endDate || new Date(), // 任务截止日期
-                endTime: this.$store.state.event.endTime || '23:59' // 任务截止时间
-            }                                                                 
-        },
-        computed: {
-            // 是否展示弹窗
-            showModal() {
-                return this.$store.state.event.showModal 
-            } 
-        },
+        computed: mapState({
+            showModal: state => state.event.showModal, // 是否展示弹窗
+            id: state => state.event.id, // 任务id
+            text: state => state.event.text, // 任务描述
+            endDate: state => state.event.endDate || new Date(), // 任务截止日期
+            endTime: state => state.event.endTime || '23:59' // 任务截止时间
+        }),
         methods: {
             moment,
             // 关闭弹窗
             closeModal() {
                 this.$store.commit('HANDLEMODAL')
+                this.id = ''
+                this.text = ''
+                this.endDate = new Date()
+                this.endTime = '23:59'
             },
             // 修改todo任务，已有id为修改，id为-1为新增
             editTodo() {
-                console.log(this.endDate, typeof this.endDate)
-                console.log(this.endTime, typeof this.endTime)
+                console.log('modal', this.state)
+                 
                 if (typeof this.endDate === 'object') {
                     let year = this.endDate.getFullYear()// getFullYear() 返回年
                     let month = this.endDate.getMonth() + 1// getMonth() 返回月份 (0 ~ 11)
@@ -57,13 +56,8 @@
                 item.id = this.id
                 item.endDate = this.endDate
                 item.endTime = this.endTime
-                this.$store.dispatch('editTodo', item)  
+                this.$store.dispatch('editTodo', item)
                 this.$store.commit('HANDLEMODAL') // 关闭编辑弹窗
-
-                this.id = -1
-                this.text = ''
-                this.endDate = new Date()
-                this.endTime = '23:59'
             },
             // 处理日期选择器的变化
             onChangeDate(date, dateString) { 

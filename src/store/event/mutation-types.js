@@ -19,3 +19,6 @@ export const COLLAPSE = 'COLLAPSE'
 
 // 展示编辑框
 export const HANDLEMODAL = 'HANDLEMODAL'
+
+// 根据id获取todo的详细信息
+export const GETTODO = 'GETTODO'

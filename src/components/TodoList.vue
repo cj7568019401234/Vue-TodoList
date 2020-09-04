@@ -56,15 +56,12 @@
         getTodo() {
           return this.$store.getters.getTodo
         },
-
         // 获取已完成的任务
         getDone() {
           return this.$store.getters.getDone
         },
-
         // 是否展示已完成任务列表
         showDone: state => state.event.showDone,
-
         // 是否展示未完成任务列表
         showTodo: state => state.event.showTodo
       }),
@@ -79,8 +76,8 @@
           },
           // 编辑任务
           editTodo(id) {
+             this.$store.commit('GETTODO', id)
              this.$store.commit('HANDLEMODAL')
-
           },
           // 删除任务
           deleteTodo(id) {
