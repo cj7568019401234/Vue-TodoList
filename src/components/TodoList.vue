@@ -51,38 +51,37 @@
 <script>
   import { mapState } from 'vuex'
   export default {
-      computed: mapState({
-        // 获取未完成的任务
-        getTodo() {
-          return this.$store.getters.getTodo
+    computed: mapState({
+      // 获取未完成的任务
+      getTodo() {
+        return this.$store.getters.getTodo
+      },
+      // 获取已完成的任务
+      getDone() {
+        return this.$store.getters.getDone
+      },
+      showDone: state => state.event.showDone, // 是否展示已完成任务列表
+      showTodo: state => state.event.showTodo, // 是否展示未完成任务列表
+      showModal: state => state.event.showModal // 是否展示弹窗
+    }),
+    methods: {
+        // 处理展开或者收缩任务列表
+        handleCollapseEvent(type) {
+          this.$store.commit('COLLAPSE', type)
         },
-        // 获取已完成的任务
-        getDone() {
-          return this.$store.getters.getDone
+        // 扭转任务状态
+        toggleTodo(id) {
+          this.$store.dispatch('toggleTodo', id)
         },
-        // 是否展示已完成任务列表
-        showDone: state => state.event.showDone,
-        // 是否展示未完成任务列表
-        showTodo: state => state.event.showTodo
-      }),
-      methods: {
-          // 处理展开或者收缩任务列表
-          handleCollapseEvent(type) {
-            this.$store.commit('COLLAPSE', type)
-          },
-          // 扭转任务状态
-          toggleTodo(id) {
-            this.$store.dispatch('toggleTodo', id)
-          },
-          // 编辑任务
-          editTodo(id) {
-             this.$store.commit('GETTODO', id)
-             this.$store.commit('HANDLEMODAL')
-          },
-          // 删除任务
-          deleteTodo(id) {
-            this.$store.dispatch('deleteTodo', id)
-          }
-      }
+        // 编辑任务
+        editTodo(id) {
+          this.$store.commit('GETTODO', id)
+          this.$store.dispatch('handleModal')
+        },
+        // 删除任务
+        deleteTodo(id) {
+          this.$store.dispatch('deleteTodo', id)
+        }
+    }
   }
 </script>

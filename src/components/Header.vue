@@ -1,13 +1,21 @@
 <template>
 <div class="nav">
     <label class='nav__logo '>❤ TodoList</label>
-    <div class="nav__add" @click="showModal"></div>
+    <div class="nav__add" :showModal="showModal" @click="addTodo"></div>
 </div>
 </template>
 <script>
     export default {
+        data() {
+            return {
+                showModal: false
+            }
+        },
         methods: {
-            showModal() { this.$store.commit('HANDLEMODAL') } // 展示编辑框
+            addTodo() { 
+                this.showModal = true
+                this.$store.dispatch('handleModal') 
+            } // 展示编辑框
         }
     }
 </script>
