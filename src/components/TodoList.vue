@@ -75,8 +75,8 @@
         },
         // 编辑任务
         editTodo(id) {
-          this.$store.commit('GETTODO', id)
-          this.$store.dispatch('handleModal')
+          this.$store.commit('GETTODO', id) // 根据id获取待办事项的数据，以便直接把数据展示在编辑框上，可直接编辑
+          this.$store.dispatch('handleModal') // 展示编辑框
         },
         // 删除任务
         deleteTodo(id) {

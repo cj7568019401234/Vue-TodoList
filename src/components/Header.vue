@@ -12,10 +12,11 @@
             }
         },
         methods: {
+            // 点击添加按钮，展示编辑框
             addTodo() { 
                 this.showModal = true
-                this.$store.dispatch('handleModal') 
-            } // 展示编辑框
+                this.$store.dispatch('handleModal') // 展示编辑框
+            } 
         }
     }
 </script>

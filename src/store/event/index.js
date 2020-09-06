@@ -8,18 +8,17 @@ import getters from './getters.js'
 
 let state = func.localData.get() || 
 {
-    todoList: [],
-    showTodo: true,
-    showDone: true,
-    showModal: false,
-    id: '',
-    text: '',
-    endDate: '',
-    endTime: ''
+    todoList: [], // 待办事项列表
+    showTodo: true, // 是否展示未完成任务的列表
+    showDone: true, // 是否展示已完成任务的列表
+    showModal: false, // 是否展示编辑框
+    id: '', // 待编辑待办事项的id
+    text: '', // 待编辑待办事项描述
+    endDate: '', // 待编辑待办事项的截止日期
+    endTime: '' // 待编辑待办事项的截止时间
 }
 
 export default {
-    // namespaced: true,
     state,
     getters,
     actions,

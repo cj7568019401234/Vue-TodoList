@@ -35,6 +35,7 @@
             showModal: state => state.event.showModal // 是否展示弹窗
         }),
         watch: {
+            // 弹窗状态变化的时候更新数据，以便拉取到最新的数据展示在编辑框上
             showModal() {
                 this.id = this.$store.state.event.id
                 this.text = this.$store.state.event.text
@@ -57,12 +58,7 @@
                     this.endDate = `${year}/${month}/${day}` // 格式化日期
                 }
 
-                let item = {}
-                item.text = this.text
-                item.id = this.id
-                item.endDate = this.endDate
-                item.endTime = this.endTime
-
+                let item = { text: this.text, id: this.id, endDate: this.endDate, endTime: this.endTime }
                 this.$store.dispatch('editTodo', item)
                 this.$store.dispatch('handleModal') // 关闭编辑弹窗
             },
